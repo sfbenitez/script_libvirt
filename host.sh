@@ -13,6 +13,9 @@ then
   umount /mnt/
   #attach mv2
   virsh attach-disk MV2 --source /dev/volumenes1/apache --target vdb --live
+  # cambia regla iptable
+  iptables -t nat -D PREROUTING -i br0 -p tcp --dport 80 -j DNAT --to 10.10.10.2:80
+  iptables -t nat -A PREROUTING -i br0 -p tcp --dport 80 -j DNAT --to 10.10.10.3:80
   #ejecutar montar en mv2
   ssh root@10.10.10.3 "/root/mount_disk.sh"
   rm /root/mv1
