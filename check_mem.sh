@@ -10,6 +10,6 @@ test_memory(){
 }
 if test_memory;
 then
-  umount /srv/www
+  umount /srv/www # comented in mv2
   echo "HELP" | ssh root@10.10.10.1 "cat > /root/$HOSTNAME"
 fi
